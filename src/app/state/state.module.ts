@@ -16,7 +16,7 @@ import { UserEffects } from './user/user.effects';
 @NgModule({
   imports: [
     CommonModule,
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
