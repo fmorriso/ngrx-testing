@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexComponent should match snapshot 1`] = `
+<ng-component
+  router={[Function Router]}
+  store={[Function Object]}
+  users="undefined"
+>
+  <button
+    ng-reflect-router-link="add"
+    routerlink="add"
+    tabindex="0"
+  >
+    Add User
+  </button><app-user-list>
+    <ul>
+      
+    </ul>
+  </app-user-list>
+</ng-component>
+`;
