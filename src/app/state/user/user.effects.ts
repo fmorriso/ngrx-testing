@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '@core/services/user.service';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
@@ -23,23 +23,32 @@ import {
 @Injectable()
 export class UserEffects {
   @Effect()
-  addUser: Observable<Action> = this.actions$
+  addUser: Observable<Action> = this.actions$.pipe(
+    ofType<AddUser>(UserActionTypes.AddUser),
+    map(action => action.payload),
+    exhaustMap(payload => this.userService.addUser(payload.user)),
+    map(user => new AddUserSuccess({ user })),
+    catchError(error => of(new AddUserFail({ error })))
+  );
+
+ /*
+ https://ngrx.io/guide/migration/v7
     .ofType<AddUser>(UserActionTypes.AddUser)
     .pipe(
       map(action => action.payload),
       exhaustMap(payload => this.userService.addUser(payload.user)),
       map(user => new AddUserSuccess({ user })),
       catchError(error => of(new AddUserFail({ error })))
-    );
+    );*/
 
   @Effect()
-  loadUser: Observable<Action> = this.actions$
-    .ofType<LoadUser>(UserActionTypes.LoadUser)
+  loaduserold: observable<action> = this.actions$
+    .oftype<loaduser>(useractiontypes.loaduser)
     .pipe(
       map(action => action.payload),
-      exhaustMap(payload => this.userService.getUser(payload.id)),
-      map(user => new LoadUserSuccess({ user })),
-      catchError(error => of(new LoadUserFail({ error })))
+      exhaustmap(payload => this.userservice.getuser(payload.id)),
+      map(user => new loadusersuccess({ user })),
+      catcherror(error => of(new loaduserfail({ error })))
     );
 
   @Effect()

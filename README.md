@@ -5,6 +5,10 @@
 This project is based on a presentation given at the Rocky Mountain Angular meetup.
 Be sure to check out the [NgRx Testing slide deck](https://slides.com/blove/ngrx-testing-jasmine-marbles) as well.
 
+# NgRx Version 7 Migration 
+
+https://ngrx.io/guide/migration/v7 - see ofType removal
+
 ## Blog Posts
 
 Check out some blog posts I wrote to get you started with Jest in an Angular project and testing NgRx apps using jasmine-marbles:
