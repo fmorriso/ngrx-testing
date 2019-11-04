@@ -23,12 +23,13 @@ import {
 @Injectable()
 export class UserEffects {
   @Effect()
-  addUser: Observable<Action> = this.actions$.pipe(
-    ofType<AddUser>(UserActionTypes.AddUser),
-    map(action => action.payload),
-    exhaustMap(payload => this.userService.addUser(payload.user)),
-    map(user => new AddUserSuccess({ user })),
-    catchError(error => of(new AddUserFail({ error })))
+  addUser: Observable<Action> = this.actions$
+    .pipe(
+      ofType<AddUser>(UserActionTypes.AddUser),
+      map(action => action.payload),
+      exhaustMap(payload => this.userService.addUser(payload.user)),
+      map(user => new AddUserSuccess({ user })),
+      catchError(error => of(new AddUserFail({ error })))
   );
 
  /*
@@ -39,18 +40,19 @@ export class UserEffects {
       exhaustMap(payload => this.userService.addUser(payload.user)),
       map(user => new AddUserSuccess({ user })),
       catchError(error => of(new AddUserFail({ error })))
-    );*/
+    );
+*/
 
   @Effect()
-  loaduserold: observable<action> = this.actions$
-    .oftype<loaduser>(useractiontypes.loaduser)
+  loadUsers: Observable<Action> = this.actions$
     .pipe(
-      map(action => action.payload),
-      exhaustmap(payload => this.userservice.getuser(payload.id)),
-      map(user => new loadusersuccess({ user })),
-      catcherror(error => of(new loaduserfail({ error })))
+      ofType<LoadUsers>(UserActionTypes.LoadUsers),
+      exhaustMap(() => this.userService.getUsers()),
+      map(users => new LoadUsersSuccess({ users })),
+      catchError(error => of(new LoadUsersFail({ error })))
     );
 
+/*
   @Effect()
   loadUsers: Observable<Action> = this.actions$
     .ofType<LoadUsers>(UserActionTypes.LoadUsers)
@@ -59,6 +61,8 @@ export class UserEffects {
       map(users => new LoadUsersSuccess({ users })),
       catchError(error => of(new LoadUsersFail({ error })))
     );
+
+ */
 
   @Effect()
   updateUser: Observable<Action> = this.actions$
