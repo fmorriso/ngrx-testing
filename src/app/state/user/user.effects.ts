@@ -43,7 +43,6 @@ export class UserEffects {
 
   @Effect()
   updateUser: Observable<Action> = this.actions$
-
     .pipe(
     ofType<UpdateUser>(UserActionTypes.UpdateUser),
       map(action => action.payload),
