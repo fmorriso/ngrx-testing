@@ -32,17 +32,6 @@ export class UserEffects {
       catchError(error => of(new AddUserFail({ error })))
   );
 
- /*
- https://ngrx.io/guide/migration/v7
-    .ofType<AddUser>(UserActionTypes.AddUser)
-    .pipe(
-      map(action => action.payload),
-      exhaustMap(payload => this.userService.addUser(payload.user)),
-      map(user => new AddUserSuccess({ user })),
-      catchError(error => of(new AddUserFail({ error })))
-    );
-*/
-
   @Effect()
   loadUsers: Observable<Action> = this.actions$
     .pipe(
@@ -52,22 +41,11 @@ export class UserEffects {
       catchError(error => of(new LoadUsersFail({ error })))
     );
 
-/*
-  @Effect()
-  loadUsers: Observable<Action> = this.actions$
-    .ofType<LoadUsers>(UserActionTypes.LoadUsers)
-    .pipe(
-      exhaustMap(() => this.userService.getUsers()),
-      map(users => new LoadUsersSuccess({ users })),
-      catchError(error => of(new LoadUsersFail({ error })))
-    );
-
- */
-
   @Effect()
   updateUser: Observable<Action> = this.actions$
-    .ofType<UpdateUser>(UserActionTypes.UpdateUser)
+
     .pipe(
+    ofType<UpdateUser>(UserActionTypes.UpdateUser),
       map(action => action.payload),
       exhaustMap(payload => this.userService.updateUser(payload.user)),
       map(
